@@ -1,6 +1,13 @@
 <?php
-$cur_hum = 50;
-$cur_temp = 25;
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+});
+$crud  = new crud();
+
+$cur_hum = $crud->custom_query('SELECT humidity FROM `hum_temp` ORDER BY id DESC LIMIT 1')[0];
+$cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id DESC LIMIT 1')[0];
+
+//max SELECT MAX(temperature) FROM `hum_temp` 
 ?>
 
 <html lang="en-en">
