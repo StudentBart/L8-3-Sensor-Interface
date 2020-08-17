@@ -25,11 +25,12 @@ class crud
         $latest = strtotime($latest);
         $time = $latest - $timespan * 60 * 60;
         $datetime = date("Y-m-d H:i:s", $time);
+        var_dump($datetime);
 
         $conn = $this->conn_to_db();
         $sql = "SELECT * FROM `hum_temp` where `id` >= ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $datetime);
+        $stmt->bind_param("s", $datetime);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
