@@ -4,10 +4,12 @@ spl_autoload_register(function ($class_name) {
 });
 $crud  = new crud();
 
-$cur_hum = $crud->custom_query('SELECT humidity FROM `hum_temp` ORDER BY id DESC LIMIT 1')[0];
-$cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id DESC LIMIT 1')[0];
+$cur_hum = $crud->custom_query('SELECT humidity FROM `hum_temp` ORDER BY id DESC LIMIT 1');
+$cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id DESC LIMIT 1');
 
-//max SELECT MAX(temperature) FROM `hum_temp` 
+//max SELECT MAX(temperature) FROM `hum_temp`
+
+var_dump($crud->read_all());
 ?>
 
 <html lang="en-en">
