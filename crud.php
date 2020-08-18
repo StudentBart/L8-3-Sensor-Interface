@@ -25,7 +25,6 @@ class crud
         $latest = strtotime($latest);
         $time = $latest - $timespan * 60 * 60;
         $datetime = date("Y-m-d H:i:s", $time);
-        var_dump($datetime);
 
         $conn = $this->conn_to_db();
         $sql = "SELECT * FROM `hum_temp` where `id` >= ?";

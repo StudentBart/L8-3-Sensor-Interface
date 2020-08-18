@@ -8,8 +8,6 @@ $cur_hum = $crud->custom_query('SELECT humidity FROM `hum_temp` ORDER BY id DESC
 $cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id DESC LIMIT 1');
 
 //max SELECT MAX(temperature) FROM `hum_temp`
-
-var_dump($crud->read_all());
 ?>
 
 <html lang="en-en">
@@ -22,50 +20,55 @@ var_dump($crud->read_all());
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            let hum_data = google.visualization.arrayToDataTable([
-                ['Time', 'Humidity'],
-                ['00:00', 56],
-                ['00:15', 57],
-                ['00:30', 53],
-                ['00:45', 54]
-            ]);
+            let hum_table = null;
+            let temp_table = null;
 
-            let temp_data = google.visualization.arrayToDataTable([
-                ['Time', 'Temperature'],
-                ['00:00', 25],
-                ['00:15', 26],
-                ['00:30', 24],
-                ['00:45', 26]
-            ]);
+                $.ajax({
+                method: "GET",
+                url: "get_data.php"
+            })
+                .done(function(response) {
+                    let weather_data = JSON.parse(response);
+                    let recent_hum = weather_data[0];
+                    let recent_temp = weather_data[1];
 
-            let hum_options = {
-                hAxis: {
-                    title: 'Time'
-                },
-                vAxis: {
-                    title: 'Humidity %'
-                },
-                title: 'bedroom Humidity',
-                curveType: 'function',
-                legend: {position: 'none'}
-            };
-            let temp_options = {
-                hAxis: {
-                    title: 'Time'
-                },
-                vAxis: {
-                    title: '°C'
-                },
-                title: 'bedroom Temperature',
-                curveType: 'function',
-                legend: {position: 'none'}
-            };
+                    recent_hum.unshift(['Time', 'Humidity'])
+                    recent_temp.unshift(['Time', 'Temperature'])
 
-            let hum_chart = new google.visualization.LineChart($('#hum_chart')[0]);
-            let temp_chart = new google.visualization.LineChart($('#temp_chart')[0]);
+                    console.log(recent_hum)
 
-            hum_chart.draw(hum_data, hum_options);
-            temp_chart.draw(temp_data, temp_options);
+                    hum_table = google.visualization.arrayToDataTable(recent_hum);
+                    temp_table = google.visualization.arrayToDataTable(recent_temp);
+
+                    let hum_options = {
+                        hAxis: {
+                            title: 'Time'
+                        },
+                        vAxis: {
+                            title: 'Humidity %'
+                        },
+                        title: 'bedroom Humidity',
+                        curveType: 'function',
+                        legend: {position: 'none'}
+                    };
+                    let temp_options = {
+                        hAxis: {
+                            title: 'Time'
+                        },
+                        vAxis: {
+                            title: '°C'
+                        },
+                        title: 'bedroom Temperature',
+                        curveType: 'function',
+                        legend: {position: 'none'}
+                    };
+
+                    let hum_chart = new google.visualization.LineChart($('#hum_chart')[0]);
+                    let temp_chart = new google.visualization.LineChart($('#temp_chart')[0]);
+
+                    hum_chart.draw(hum_table, hum_options);
+                    temp_chart.draw(temp_table, temp_options);
+                })
         }
     </script>
     <link rel="stylesheet" href="style.css">
