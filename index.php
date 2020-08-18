@@ -42,24 +42,30 @@ $cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id 
 
                     let hum_options = {
                         hAxis: {
-                            title: 'Time'
+                            title: 'Time',
+                            textStyle: {
+                                fontSize: 10
+                            }
                         },
                         vAxis: {
                             title: 'Humidity %'
                         },
                         title: 'bedroom Humidity',
-                        curveType: 'function',
+                        curveType: 'none',
                         legend: {position: 'none'}
                     };
                     let temp_options = {
                         hAxis: {
-                            title: 'Time'
+                            title: 'Time',
+                            textStyle: {
+                                fontSize: 10
+                            }
                         },
                         vAxis: {
                             title: '°C'
                         },
                         title: 'bedroom Temperature',
-                        curveType: 'function',
+                        curveType: 'none',
                         legend: {position: 'none'}
                     };
 

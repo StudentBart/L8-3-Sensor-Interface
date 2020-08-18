@@ -13,7 +13,7 @@ $crud  = new crud();
 //      'humidity' => float 70
 //      'temperature' => float 24
 
-$recent_data = $crud->read_all(6);
+$recent_data = $crud->read_all();
 
 // that should be converted to
 //
@@ -33,8 +33,8 @@ $recent_data = $crud->read_all(6);
 $out = [[], []];
 
 foreach ($recent_data as $item) {
-    array_push($out[0], [$item['id'], $item['humidity']]);
-    array_push($out[1], [$item['id'], $item['temperature']]);
+    array_push($out[0], [substr($item['id'], 11, 5), $item['humidity']]);
+    array_push($out[1], [substr($item['id'], 11, 5), $item['temperature']]);
 }
 
 echo json_encode($out);

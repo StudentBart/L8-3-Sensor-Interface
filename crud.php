@@ -17,7 +17,7 @@ class crud
         return $result->fetch_row()[0];
     }
 
-    function read_all($timespan = 72) {
+    function read_all($timespan = 24) {
         // get latest weather read timestamp and convert it so you can subtract the timespan from it in hours,
         // then convert that back to the timestamp string for the sql query
 
