@@ -29,7 +29,7 @@ function drawChart() {
                 vAxis: {
                     title: 'Humidity %'
                 },
-                title: 'Bedroom Humidity (Last 24 Hours)',
+                title: 'Bedroom Humidity (Past 24 Hours)',
                 curveType: 'none',
                 legend: {position: 'none'}
             };
@@ -43,7 +43,7 @@ function drawChart() {
                 vAxis: {
                     title: '°C'
                 },
-                title: 'Bedroom Temperature (Last 24 Hours)',
+                title: 'Bedroom Temperature (Past 24 Hours)',
                 curveType: 'none',
                 legend: {position: 'none'}
             };

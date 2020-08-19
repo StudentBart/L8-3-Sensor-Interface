@@ -7,10 +7,16 @@ $crud  = new crud();
 $cur_hum = $crud->custom_query('SELECT humidity FROM `hum_temp` ORDER BY id DESC LIMIT 1');
 $cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id DESC LIMIT 1');
 
-//max SELECT MAX(temperature) FROM `hum_temp`
+$today = date("Y-m-d 00:00:00");
+
+$high_hum = $crud->custom_query("SELECT MAX(humidity) FROM `hum_temp` where `id` >= '$today'");
+$high_temp = $crud->custom_query("SELECT MAX(temperature) FROM `hum_temp` where `id` >= '$today'");
+
+$low_hum = $crud->custom_query("SELECT MIN(humidity) FROM `hum_temp` where `id` >= '$today'");
+$low_temp = $crud->custom_query("SELECT MIN(temperature) FROM `hum_temp` where `id` >= '$today'");
 ?>
 
-<html lang="en-en">
+<html lang="en-us">
 <head>
     <title><?=$cur_hum?>% | <?=$cur_temp?>°C</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -20,6 +26,33 @@ $cur_temp = $crud->custom_query('SELECT temperature FROM `hum_temp` ORDER BY id 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="today_info">
+        <h2 id="today_title">Today</h2>
+        <div id="today_hum">
+            <h4>Humidity</h4>
+            <div class="now"><?=$cur_hum?>%</div>
+            <div class="high">
+                <p>highest</p>
+                <div id="hum_high"><?=$high_hum?>%</div>
+            </div>
+            <div class="low">
+                <p>lowest</p>
+                <div id="hum_low"><?=$low_hum?>%</div>
+            </div>
+        </div>
+        <div id="today_temp">
+            <h4>Temperature</h4>
+            <div class="now"><?=$cur_temp?>℃</div>
+            <div class="high">
+                <p>highest</p>
+                <div id="temp_high"><?=$high_temp?>℃</div>
+            </div>
+            <div class="low">
+                <p>lowest</p>
+                <div id="temp_low"><?=$low_temp?>℃</div>
+            </div>
+        </div>
+    </div>
     <div id="hum_chart" class="home_chart"></div>
     <div id="temp_chart" class="home_chart"></div>
 </body>
