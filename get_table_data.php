@@ -12,8 +12,14 @@ $crud  = new crud();
 //      'id' => string '2020-08-15 10:00:02' (length=19)
 //      'humidity' => float 70
 //      'temperature' => float 24
+function t()
+{
+    if (isset($_GET['timespan'])) {
+        return $_GET['timespan'];
+    }
+}
 
-$recent_data = $crud->read_all();
+$recent_data = $crud->read_all(t());
 
 // that should be converted to
 //

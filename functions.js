@@ -1,6 +1,6 @@
 function drawChart() {
-    let hum_table = null;
-    let temp_table = null;
+    var hum_table = null;
+    var temp_table = null;
 
     $.ajax({
         method: "GET",

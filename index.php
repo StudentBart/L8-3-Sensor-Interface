@@ -53,8 +53,24 @@ $low_temp = $crud->custom_query("SELECT MIN(temperature) FROM `hum_temp` where `
             </div>
         </div>
     </div>
-    <div id="hum_chart" class="home_chart"></div>
-    <div id="temp_chart" class="home_chart"></div>
+    <div class="chart_box">
+        <div id="hum_chart" class="home_chart"></div>
+        <div class="history" id="hum_hist">
+            <button id="hum_day">Past Day</button>
+            <button id="hum_week">Past Week</button>
+            <button id="hum_month">Past Month</button>
+            <button id="hum_year">Past Year</button>
+        </div>
+    </div>
+    <div class="chart_box">
+        <div id="temp_chart" class="home_chart"></div>
+        <div class="history" id="temp_hist">
+            <button id="temp_day">Past Day</button>
+            <button id="temp_week">Past Week</button>
+            <button id="temp_month">Past Month</button>
+            <button id="temp_year">Past Year</>
+        </div>
+    </div>
 </body>
 </html>
 

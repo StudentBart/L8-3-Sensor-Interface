@@ -68,5 +68,17 @@
         min-height: 180px;
         height: 35vh;
     }
+
+    .chart_box {
+        display: grid;
+        grid-template-columns: 9fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1px 1px;
+        grid-template-areas: ". .";
+    }
+
+    .history {
+
+    }
 }
 
