@@ -4,7 +4,7 @@
 class crud
 {
     function conn_to_db() {
-        return new mysqli("192.168.2.6", "weatheruser","9Sqv6HP", "weatherdata");
+        return new mysqli("192.168.2.4", "weatheruser","9Sqv6HP", "weatherdata");
     }
 
     function custom_query($sql) {
