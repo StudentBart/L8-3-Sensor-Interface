@@ -12,10 +12,13 @@ $crud  = new crud();
 //      'id' => string '2020-08-15 10:00:02' (length=19)
 //      'humidity' => float 70
 //      'temperature' => float 24
+
 function t()
 {
     if (isset($_GET['timespan'])) {
         return $_GET['timespan'];
+    } else {
+        return 24;
     }
 }
 
@@ -38,9 +41,32 @@ $recent_data = $crud->read_all(t());
 
 $out = [[], []];
 
-foreach ($recent_data as $item) {
-    array_push($out[0], [substr($item['id'], 11, 5), $item['humidity']]);
-    array_push($out[1], [substr($item['id'], 11, 5), $item['temperature']]);
+switch ($_GET['view']) {
+    case 'hour':
+        foreach ($recent_data as $item) {
+            array_push($out[0], [substr($item['id'], 11, 5), $item['humidity']]);
+            array_push($out[1], [substr($item['id'], 11, 5), $item['temperature']]);
+        }
+        break;
+    case 'day':
+        $bank = [];
+        foreach ($recent_data as $item) {
+            $d = substr($item['id'], 5, 5);
+            if (substr(end($bank)['id'], 5, 5) === $d || count($bank) === 0) {
+                array_push($bank, $item);
+            } else {
+                $avg_hum = (int) array_sum(array_column($bank, 'humidity')) / count($bank);
+                $avg_temp = (int) array_sum(array_column($bank, 'temperature')) / count($bank);
+
+                array_push($out[0], [substr($bank[0]['id'], 0, 10), $avg_hum]);
+                array_push($out[1], [substr($bank[0]['id'], 0, 10), $avg_temp]);
+
+                $bank = [$item];
+            }
+        }
+        break;
 }
+
+
 
 echo json_encode($out);
