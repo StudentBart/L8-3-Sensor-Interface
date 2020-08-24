@@ -68,7 +68,7 @@ $low_temp = $crud->custom_query("SELECT MIN(temperature) FROM `hum_temp` where `
             <button id="temp_day">Past Day</button>
             <button id="temp_week">Past Week</button>
             <button id="temp_month">Past Month</button>
-            <button id="temp_year">Past Year</>
+            <button id="temp_year">Past Year</button>
         </div>
     </div>
 </body>

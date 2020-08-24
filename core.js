@@ -56,4 +56,100 @@ $(window).on('load', function () {
                 drawChart();
             })
     })
+    $('#hum_month').on('click' , function () {
+        clear_hum();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?timespan=720&view=day"
+        })
+            .done(function (response) {
+                console.log(response);
+                let weather_data = JSON.parse(response);
+                let recent_hum = weather_data[0];
+
+                hum_table.addRows(recent_hum);
+                drawChart();
+            })
+    })
+    $('#hum_year').on('click' , function () {
+        clear_hum();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?timespan=8544&view=week"
+        })
+            .done(function (response) {
+                console.log(response);
+                let weather_data = JSON.parse(response);
+                let recent_hum = weather_data[0];
+
+                hum_table.addRows(recent_hum);
+                drawChart();
+            })
+    })
+    $('#temp_day').on('click' , function () {
+        clear_temp();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?view=hour"
+        })
+            .done(function (response) {
+                let weather_data = JSON.parse(response);
+                let recent_temp = weather_data[1];
+
+                temp_table.addRows(recent_temp);
+                drawChart();
+            })
+    })
+
+    $('#temp_week').on('click' , function () {
+        clear_temp();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?timespan=168&view=day"
+        })
+            .done(function (response) {
+                console.log(response);
+                let weather_data = JSON.parse(response);
+                let recent_temp = weather_data[1];
+
+                temp_table.addRows(recent_temp);
+                drawChart();
+            })
+    })
+    $('#temp_month').on('click' , function () {
+        clear_temp();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?timespan=720&view=day"
+        })
+            .done(function (response) {
+                console.log(response);
+                let weather_data = JSON.parse(response);
+                let recent_temp = weather_data[1];
+
+                temp_table.addRows(recent_temp);
+                drawChart();
+            })
+    })
+    $('#temp_year').on('click' , function () {
+        clear_temp();
+
+        $.ajax({
+            method: "GET",
+            url: "get_table_data.php?timespan=8544&view=week"
+        })
+            .done(function (response) {
+                console.log(response);
+                let weather_data = JSON.parse(response);
+                let recent_temp = weather_data[1];
+
+                temp_table.addRows(recent_temp);
+                drawChart();
+            })
+    })
 })

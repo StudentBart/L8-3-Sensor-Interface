@@ -50,9 +50,9 @@ switch ($_GET['view']) {
         break;
     case 'day':
         $bank = [];
-        foreach ($recent_data as $item) {
+        foreach ($recent_data as $key => $item) {
             $d = substr($item['id'], 5, 5);
-            if (substr(end($bank)['id'], 5, 5) === $d || count($bank) === 0) {
+            if (substr(end($bank)['id'], 5, 5) === $d && $key !== count($recent_data) - 1 || $key === 0) {
                 array_push($bank, $item);
             } else {
                 $avg_hum = (int) array_sum(array_column($bank, 'humidity')) / count($bank);
@@ -60,6 +60,28 @@ switch ($_GET['view']) {
 
                 array_push($out[0], [substr($bank[0]['id'], 0, 10), $avg_hum]);
                 array_push($out[1], [substr($bank[0]['id'], 0, 10), $avg_temp]);
+
+                $bank = [$item];
+            }
+        }
+        break;
+    case 'week':
+        $bank = [];
+        foreach ($recent_data as $key => $item) {
+            $d = $item['id'];
+            $dd = strtotime($d);
+            $week = date('W', $dd);
+            $year = date('Y', $dd);
+            $item['id'] = $week;
+            $item['y'] = $year;
+            if ((int) $week <= (int) reset($bank)['id'] + 1 && $year === reset($bank)['y'] && $key !== count($recent_data) - 1 || $key === 0) {
+                array_push($bank, $item);
+            } else {
+                $avg_hum = (int) array_sum(array_column($bank, 'humidity')) / count($bank);
+                $avg_temp = (int) array_sum(array_column($bank, 'temperature')) / count($bank);
+
+                array_push($out[0], [$bank[0]['id'], $avg_hum]);
+                array_push($out[1], [$bank[0]['id'], $avg_temp]);
 
                 $bank = [$item];
             }
