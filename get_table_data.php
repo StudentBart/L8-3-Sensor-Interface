@@ -74,7 +74,7 @@ switch ($_GET['view']) {
             $year = date('Y', $dd);
             $item['id'] = $week;
             $item['y'] = $year;
-            if ((int) $week <= (int) reset($bank)['id'] + 1 && $year === reset($bank)['y'] && $key !== count($recent_data) - 1 || $key === 0) {
+            if ((int) $week === (int) reset($bank)['id'] && $year === reset($bank)['y'] && $key !== count($recent_data) - 1 || $key === 0) {
                 array_push($bank, $item);
             } else {
                 $avg_hum = (int) array_sum(array_column($bank, 'humidity')) / count($bank);

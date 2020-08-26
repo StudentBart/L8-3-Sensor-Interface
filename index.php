@@ -27,7 +27,7 @@ $low_temp = $crud->custom_query("SELECT MIN(temperature) FROM `hum_temp` where `
 </head>
 <body>
     <div id="today_info">
-        <h2 id="today_title">Today</h2>
+        <h2 id="today_title">Today's weather</h2>
         <div id="today_hum">
             <h4>Humidity</h4>
             <div class="now"><?=$cur_hum?>%</div>
